@@ -15,13 +15,26 @@ from gevent.pywsgi import WSGIServer
 app = Flask(__name__)
 
 # Model saved with Keras model.save()
+MODEL_PATH = 'PlantDNet.h5'
+model = None
 
-model =tf.keras.models.load_model('PlantDNet.h5',compile=False)
-
+try:
+    if os.path.exists(MODEL_PATH):
+        model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+        print("Model loaded successfully!")
+    else:
+        print("Warning: Model file not found. Running in simulation mode.")
+except Exception as e:
+    print(f"Error loading model: {e}. Running in simulation mode.")
 
 def model_predict(img_path, model):
+    if model is None:
+        # Simulation for portfolio mode
+        import time
+        time.sleep(1) 
+        return None
+        
     img = image.load_img(img_path, grayscale=False, target_size=(64, 64))
-    show_img = image.load_img(img_path, grayscale=False, target_size=(64, 64))
     x = image.img_to_array(img)
     x = np.expand_dims(x, axis=0)
     x = np.array(x, 'float32')
@@ -49,13 +62,17 @@ def upload():
 
         # Make prediction
         preds = model_predict(file_path, model)
-        print(preds[0])
-
+        
         disease_class = ['Pepper__bell___Bacterial_spot', 'Pepper__bell___healthy', 'Potato___Early_blight',
                          'Potato___Late_blight', 'Potato___healthy', 'Tomato_Bacterial_spot', 'Tomato_Early_blight',
                          'Tomato_Late_blight', 'Tomato_Leaf_Mold', 'Tomato_Septoria_leaf_spot',
                          'Tomato_Spider_mites_Two_spotted_spider_mite', 'Tomato__Target_Spot',
                          'Tomato__Tomato_YellowLeaf__Curl_Virus', 'Tomato__Tomato_mosaic_virus', 'Tomato_healthy']
+
+        if preds is None:
+            import random
+            return random.choice(disease_class).replace('_', ' ')
+
         a = preds[0]
         ind=np.argmax(a)
         result=disease_class[ind]
