@@ -5,6 +5,14 @@
 
 An ultra-premium, AI-powered web application designed to identify plant diseases from leaf images. Built with a modern glassmorphism UI, this tool provides instant analysis and care recommendations for various crops like Tomato, Potato, Pepper, and more.
 
+## 📸 Screenshots
+
+### Homepage (Premium UI)
+![Homepage](screenshots/homepage.png)
+
+### Disease Detection Result
+![Detection Result](screenshots/result.png)
+
 ## ✨ Features
 - **Premium UI/UX:** Sleek dark-themed design with liquid gradients and glassmorphism.
 - **AI Simulation:** High-fidelity scanning animations and disease classification logic.
