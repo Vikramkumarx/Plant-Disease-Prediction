@@ -1,6 +1,7 @@
 # 🌿 PlantCare AI - Disease Detection
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge)](https://plant-care-ai-phi.vercel.app)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-blue?style=for-the-badge)](https://vikram-portfolio-pro.vercel.app)
 
 An ultra-premium, AI-powered web application designed to identify plant diseases from leaf images. Built with a modern glassmorphism UI, this tool provides instant analysis and care recommendations for various crops like Tomato, Potato, Pepper, and more.
 
